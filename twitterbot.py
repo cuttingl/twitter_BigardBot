@@ -10,7 +10,7 @@ def publishTweetFromInput(api):
 
 def senddmtest(api):
     api.send_direct_message('906078704', "test")
-    api.send_direct_message('hugobollon', "t une énaurme merde")
+    api.send_direct_message('1333782776', "t une énaurme merde")
 
 if __name__ == "__main__":
     auth = tweepy.OAuthHandler(credentials.CONSUMER_KEY, credentials.CONSUMER_SECRET)
