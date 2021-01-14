@@ -1,5 +1,5 @@
 import tweepy
-import datetime
+from datetime import datetime
 import os
 import credentials
 
@@ -9,9 +9,10 @@ def publishTweetFromInput(api):
     print(text)
 
 def senddmtest(api):
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
     api.send_direct_message('906078704', "test is doing fine")
-    for i in range (0,5):
-        api.send_direct_message('1289470864745013248', "T'es un énorme bg")
+    api.send_direct_message('945425370123251713', "salut hehe ceci est un test, envoyé à ... " + current_time)
 
 if __name__ == "__main__":
     auth = tweepy.OAuthHandler(credentials.CONSUMER_KEY, credentials.CONSUMER_SECRET)
