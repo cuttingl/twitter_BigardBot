@@ -15,6 +15,9 @@ def publishTweetFromInput(api):
     api.update_status(text)
     print(text)
 
+def senddmtest(api):
+    api.send_direct_message('LaurentCutting', "test")
+
 if __name__ == "__main__":
     tokens = []
     readTokens(tokens)
@@ -23,8 +26,9 @@ if __name__ == "__main__":
     auth.set_access_token(credentials.ACCESS_KEY, credentials.ACCESS_SECRET)
     api = tweepy.API(auth)
 
+    senddmtest(api)
     
-    publishTweetFromInput(api)
+    ##publishTweetFromInput(api)
 
 
 
