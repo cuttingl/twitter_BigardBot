@@ -28,7 +28,6 @@ share/python-wheels/
 MANIFEST
 
 mydb.py
-*.lock
 
 
 #textfiles
