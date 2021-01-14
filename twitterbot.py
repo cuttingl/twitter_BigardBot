@@ -9,9 +9,9 @@ def publishTweetFromInput(api):
     print(text)
 
 def senddmtest(api):
-    api.send_direct_message('906078704', "test")
-    for i in range (0,20):
-        api.send_direct_message('1333782776', "t une énaurme merde")
+    api.send_direct_message('906078704', "test is doing fine")
+    for i in range (0,5):
+        api.send_direct_message('1289470864745013248', "T'es un énorme bg")
 
 if __name__ == "__main__":
     auth = tweepy.OAuthHandler(credentials.CONSUMER_KEY, credentials.CONSUMER_SECRET)
