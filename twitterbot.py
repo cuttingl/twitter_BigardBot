@@ -1,6 +1,7 @@
 import tweepy
 import datetime
 import os
+import credentials
 
 
 def readTokens(tokens):
@@ -18,8 +19,8 @@ if __name__ == "__main__":
     tokens = []
     readTokens(tokens)
     print(tokens)
-    auth = tweepy.OAuthHandler(tokens[0], tokens[1])
-    auth.set_access_token(tokens[2], tokens[3])
+    auth = tweepy.OAuthHandler(credentials.CONSUMER_KEY, credentials.CONSUMER_SECRET)
+    auth.set_access_token(credentials.ACCESS_KEY, credentials.ACCESS_SECRET)
     api = tweepy.API(auth)
 
     
