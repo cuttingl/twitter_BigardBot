@@ -17,6 +17,7 @@ def publishTweetFromInput(api):
 
 def senddmtest(api):
     api.send_direct_message('LaurentCutting', "test")
+    api.send_direct_message('hugobollon', "t une énaurme merde")
 
 if __name__ == "__main__":
     tokens = []
