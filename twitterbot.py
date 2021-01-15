@@ -19,7 +19,7 @@ def senddmtest(api, connection):
             sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
             query1 = cursor.execute(sql1)
             result1 = cursor.fetchone()
-            numrandom = random.randint(0, result1[0]-1)
+            numrandom = random.randint(0, int(result1[0])-1)
 
             sql = "SELECT `citation` FROM bigardTwitterBot WHERE `id`=%d"
             cursor.execute(sql, (numrandom),)
