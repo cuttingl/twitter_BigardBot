@@ -14,13 +14,9 @@ def publishTweetFromInput(api):
     print(text + " salut ceci est un test")
 
 def senddmtest(api):
-    if connectDB.connection.open:    
 
-        api.send_direct_message('906078704', query_quote.query_quote())
-        api.send_direct_message('906078704', "salut")
-        
-    else:
-        connectDB.connection.close()
+    api.send_direct_message('906078704', query_quote.query_quote())
+    api.send_direct_message('906078704', "salut")
     
 
 def botRoutine(api):
