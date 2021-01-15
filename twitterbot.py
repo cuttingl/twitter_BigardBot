@@ -20,18 +20,17 @@ def senddmtest(ap, connection):
 
     with connection:
          with connectDB.connection.cursor() as cursor:
+
             sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
             cursor.execute(sql1)
+
             resultNum = cursor.fetchone()
             number_cols = resultNum[0]
             numrandom = random.randint(0, number_cols-1)
-            cursor.close()
-            connectDB.connection.close()
 
-    with connection:
-         with connectDB.connection.cursor() as cursor:
             sql = "SELECT `citation` FROM bigardTwitterBot WHERE `id`="+ str(numrandom)
             cursor.execute(sql)
+            
             resultQuote = cursor.fetchone()
             quote = resultQuote[0]
             cursor.close()
