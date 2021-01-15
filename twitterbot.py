@@ -1,6 +1,7 @@
 import tweepy
 from datetime import datetime
 import os
+import query_quote
 #import credentials
 
 def publishTweetFromInput(api):
@@ -9,10 +10,7 @@ def publishTweetFromInput(api):
     print(text)
 
 def senddmtest(api):
-    now = datetime.now()
-    current_time = now.strftime("%H:%M:%S")
-    api.send_direct_message('906078704', "test is doing fine")
-    api.send_direct_message('945425370123251713', "salut hehe ceci est un test, envoyé à ... " + current_time)
+    api.send_direct_message('906078704', query_quote.query_quote())
 
 def botRoutine(api):
 
