@@ -1,11 +1,10 @@
 import tweepy
 from datetime import datetime
 import os
-import query_quote
 import credentials
 import pymysql
 import random
-import connectDB
+import time
 
 def publishTweetFromInput(api):
     text = input("le text de votre tweet : ")
@@ -19,7 +18,7 @@ def senddmtest(ap, connection):
     quote = ""
 
     with connection:
-         with connectDB.connection.cursor() as cursor:
+         with connection.cursor() as cursor:
 
             sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
             cursor.execute(sql1)
@@ -34,19 +33,41 @@ def senddmtest(ap, connection):
             resultQuote = cursor.fetchone()
             quote = resultQuote[0]
             cursor.close()
-            connectDB.connection.close()
+            connection.close()
 
     api.send_direct_message('906078704', quote)
-    api.send_direct_message('906078704', "salut")
-    
 
-def botRoutine(api):
+def botRoutine(api, connection):
 
     now = datetime.now().time()
     current_time = now.strftime("%H:%M:%S")
+
+    numrandom = 0
+    quote = ""
+    interval = 60 * 60 * 6 * 4
+
     while (True):
-        if current_time == "19:00":
-            api.update_status("""random_text_generated""")
+        with connection:
+         with connection.cursor() as cursor:
+
+            sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
+            cursor.execute(sql1)
+
+            resultNum = cursor.fetchone()
+            number_cols = resultNum[0]
+            numrandom = random.randint(0, number_cols-1)
+
+            sql = "SELECT `citation` FROM bigardTwitterBot WHERE `id`="+ str(numrandom)
+            cursor.execute(sql)
+            
+            resultQuote = cursor.fetchone()
+            quote = resultQuote[0]
+            cursor.close()
+            connection.close()
+
+        if current_time == "21:50":
+            api.update_status(quote)
+            time.sleep(interval)
 
 
 if __name__ == "__main__":
@@ -59,6 +80,9 @@ if __name__ == "__main__":
                              database=credentials.JaName)
 
     senddmtest(api, connection)
+
+    botRoutine(api, connection)
+    
     now = datetime.now().time()
     current_time = now.strftime("%H:%M")
     print(current_time == "18:00")
