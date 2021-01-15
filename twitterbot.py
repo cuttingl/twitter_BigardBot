@@ -32,17 +32,12 @@ if __name__ == "__main__":
     auth.set_access_token(credentials.ACCESS_KEY, credentials.ACCESS_SECRET)
     api = tweepy.API(auth)
 
-    connection = pymysql.connect(host=credentials.JaHost,
-                             user=credentials.JaUser,
-                             password=credentials.JaPwrd,
-                             database=credentials.JaName)
-    connection.open()
-    senddmtest(api, connection)
+    
+    senddmtest(api)
     now = datetime.now().time()
     current_time = now.strftime("%H:%M")
     print(current_time == "18:00")
     ##publishTweetFromInput(api)
-    connection.close()
 
 
 
