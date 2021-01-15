@@ -3,6 +3,8 @@ from datetime import datetime
 import os
 import query_quote
 import credentials
+import pymysql
+import random
 
 def publishTweetFromInput(api):
     text = input("le text de votre tweet : ")
@@ -10,10 +12,23 @@ def publishTweetFromInput(api):
     print(text)
     print(text + " salut ceci est un test")
 
-def senddmtest(api):
-    api.send_direct_message('906078704', query_quote.query_quote())
-    #print(query_quote.query_quote())
-    api.send_direct_message('906078704', "salut")
+def senddmtest(api, connection):
+    with connection:
+        with connection.cursor() as cursor:
+            # Create a new record
+            sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
+            query1 = cursor.execute(sql1)
+            result1 = cursor.fetchone()
+            numrandom = random.randint(0, result1[0]-1)
+
+            sql = "SELECT `citation` FROM bigardTwitterBot WHERE `id`=%d"
+            cursor.execute(sql, (numrandom),)
+            result = cursor.fetchone()
+
+            api.send_direct_message('906078704', result[0] )
+    
+            api.send_direct_message('906078704', "salut")
+    
 
 def botRoutine(api):
 
@@ -29,11 +44,17 @@ if __name__ == "__main__":
     auth.set_access_token(credentials.ACCESS_KEY, credentials.ACCESS_SECRET)
     api = tweepy.API(auth)
 
+    connection = pymysql.connect(host=credentials.JaHost,
+                             user=credentials.JaUser,
+                             password=credentials.JaPwrd,
+                             database=credentials.JaName)
+
     senddmtest(api)
     now = datetime.now().time()
     current_time = now.strftime("%H:%M")
     print(current_time == "18:00")
     ##publishTweetFromInput(api)
+    connection.close()
 
 
 
