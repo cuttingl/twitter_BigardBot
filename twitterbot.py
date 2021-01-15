@@ -49,7 +49,7 @@ if __name__ == "__main__":
                              password=credentials.JaPwrd,
                              database=credentials.JaName)
 
-    senddmtest(api)
+    senddmtest(api, connection)
     now = datetime.now().time()
     current_time = now.strftime("%H:%M")
     print(current_time == "18:00")
