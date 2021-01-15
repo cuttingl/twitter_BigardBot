@@ -12,22 +12,10 @@ def publishTweetFromInput(api):
     print(text)
     print(text + " salut ceci est un test")
 
-def senddmtest(api, connection):
-    with connection:
-        with connection.cursor() as cursor:
-            # Create a new record
-            sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
-            query1 = cursor.execute(sql1)
-            result1 = cursor.fetchone()
-            numrandom = random.randint(0, int(result1[0])-1)
-            print(numrandom)
-            sql = "SELECT `citation` FROM bigardTwitterBot WHERE `id`="+ str(numrandom)
-            cursor.execute(sql)
-            result = cursor.fetchone()
-
-            api.send_direct_message('906078704', result[0] )
+def senddmtest(api):        
+    api.send_direct_message('906078704', query_quote.query_quote())
     
-            api.send_direct_message('906078704', "salut")
+    api.send_direct_message('906078704', "salut")
     
 
 def botRoutine(api):
@@ -48,7 +36,7 @@ if __name__ == "__main__":
                              user=credentials.JaUser,
                              password=credentials.JaPwrd,
                              database=credentials.JaName)
-
+    connection.open()
     senddmtest(api, connection)
     now = datetime.now().time()
     current_time = now.strftime("%H:%M")
