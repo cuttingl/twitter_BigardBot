@@ -5,6 +5,7 @@ import credentials
 import pymysql
 import random
 import time
+import connectDB
 
 def publishTweetFromInput(api):
     text = input("le text de votre tweet : ")
@@ -12,13 +13,13 @@ def publishTweetFromInput(api):
     print(text)
     print(text + " salut ceci est un test")
 
-def senddmtest(ap, connection):
+def senddmtest(api):
 
     numrandom = 0
     quote = ""
 
-    with connection:
-         with connection.cursor() as cursor:
+    with connectDB.connection:
+         with connectDB.connection.cursor() as cursor:
 
             sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
             cursor.execute(sql1)
@@ -33,11 +34,11 @@ def senddmtest(ap, connection):
             resultQuote = cursor.fetchone()
             quote = resultQuote[0]
             cursor.close()
-            connection.close()
+            connectDB.connection.close()
 
     api.send_direct_message('906078704', quote)
 
-def botRoutine(api, connection):
+def botRoutine(api):
 
     now = datetime.now().time()
     current_time = now.strftime("%H:%M:%S")
@@ -47,8 +48,8 @@ def botRoutine(api, connection):
     interval = 60 * 60 * 6 * 4
 
     while (True):
-        with connection:
-         with connection.cursor() as cursor:
+        with connectDB.connection:
+         with connectDB.connection.cursor() as cursor:
 
             sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
             cursor.execute(sql1)
@@ -63,7 +64,7 @@ def botRoutine(api, connection):
             resultQuote = cursor.fetchone()
             quote = resultQuote[0]
             cursor.close()
-            connection.close()
+            connectDB.connection.close()
 
         if current_time == "21:50":
             api.update_status(quote)
@@ -74,14 +75,10 @@ if __name__ == "__main__":
     auth = tweepy.OAuthHandler(credentials.CONSUMER_KEY, credentials.CONSUMER_SECRET)
     auth.set_access_token(credentials.ACCESS_KEY, credentials.ACCESS_SECRET)
     api = tweepy.API(auth)
-    connection = pymysql.connect(host=credentials.JaHost,
-                             user=credentials.JaUser,
-                             password=credentials.JaPwrd,
-                             database=credentials.JaName)
 
-    ##senddmtest(api, connection)
+    senddmtest(api)
 
-    botRoutine(api, connection)
+    ##botRoutine(api)
 
     now = datetime.now().time()
     current_time = now.strftime("%H:%M")
