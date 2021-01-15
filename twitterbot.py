@@ -15,6 +15,9 @@ def publishTweetFromInput(api):
 
 def senddmtest(ap, connection):
 
+    numrandom = 0
+    quote = ""
+
     with connection:
          with connectDB.connection.cursor() as cursor:
             sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
