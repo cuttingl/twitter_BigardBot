@@ -13,10 +13,12 @@ def publishTweetFromInput(api):
     print(text)
     print(text + " salut ceci est un test")
 
-def senddmtest(api):
+def senddmtest(ap, connection):
+
     numrandom = 0
     quote = ""
-    with connectDB.connection:
+
+    with connection:
          with connectDB.connection.cursor() as cursor:
 
             sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
@@ -34,7 +36,9 @@ def senddmtest(api):
             cursor.close()
             connectDB.connection.close()
 
-    api.send_direct_message('906078704', query_quote.query_quote())
+    api.send_direct_message('906078704', quote)
+    api.send_direct_message('906078704', "salut")
+    
 
 def botRoutine(api):
 
@@ -49,7 +53,12 @@ if __name__ == "__main__":
     auth = tweepy.OAuthHandler(credentials.CONSUMER_KEY, credentials.CONSUMER_SECRET)
     auth.set_access_token(credentials.ACCESS_KEY, credentials.ACCESS_SECRET)
     api = tweepy.API(auth)
-    senddmtest(api)
+    connection = pymysql.connect(host=credentials.JaHost,
+                             user=credentials.JaUser,
+                             password=credentials.JaPwrd,
+                             database=credentials.JaName)
+
+    senddmtest(api, connection)
     now = datetime.now().time()
     current_time = now.strftime("%H:%M")
     print(current_time == "18:00")
