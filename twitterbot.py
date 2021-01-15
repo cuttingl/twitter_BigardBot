@@ -21,8 +21,8 @@ def senddmtest(api, connection):
             result1 = cursor.fetchone()
             numrandom = random.randint(0, int(result1[0])-1)
             print(numrandom)
-            sql = "SELECT `citation` FROM bigardTwitterBot WHERE `id`=%d"
-            cursor.execute(sql, 0)
+            sql = "SELECT `citation` FROM bigardTwitterBot WHERE `id`="+ str(numrandom)
+            cursor.execute(sql)
             result = cursor.fetchone()
 
             api.send_direct_message('906078704', result[0] )
