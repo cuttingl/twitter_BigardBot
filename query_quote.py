@@ -7,11 +7,12 @@ def query_quote():
     with connectDB.connection:
          with connectDB.connection.cursor() as cursor:
              # Create a new record
-            sql = "SELECT `citation` FROM bigardTwitterBot WHERE `id`="+ str(random_number())
+            print(random_number())
+            """sql = "SELECT `citation` FROM bigardTwitterBot WHERE `id`="+ str(random_number())
             cursor.execute(sql)
             resultQuote = cursor.fetchone()
             quote = resultQuote[0]            
-            return quote
+            return quote"""
 
 
 def random_number():
