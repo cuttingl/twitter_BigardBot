@@ -5,6 +5,7 @@ import query_quote
 import credentials
 import pymysql
 import random
+import connectDB
 
 def publishTweetFromInput(api):
     text = input("le text de votre tweet : ")
@@ -12,10 +13,14 @@ def publishTweetFromInput(api):
     print(text)
     print(text + " salut ceci est un test")
 
-def senddmtest(api):        
-    api.send_direct_message('906078704', query_quote.query_quote())
-    
-    api.send_direct_message('906078704', "salut")
+def senddmtest(api):
+    if connectDB.connection.open:    
+
+        api.send_direct_message('906078704', query_quote.query_quote())
+        api.send_direct_message('906078704', "salut")
+        
+    else:
+        connectDB.connection.close()
     
 
 def botRoutine(api):
