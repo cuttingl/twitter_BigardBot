@@ -2,7 +2,7 @@ import tweepy
 from datetime import datetime
 import os
 import query_quote
-#import credentials
+import credentials
 
 def publishTweetFromInput(api):
     text = input("le text de votre tweet : ")
@@ -24,11 +24,11 @@ def botRoutine(api):
 
 
 if __name__ == "__main__":
-    """auth = tweepy.OAuthHandler(credentials.CONSUMER_KEY, credentials.CONSUMER_SECRET)
+    auth = tweepy.OAuthHandler(credentials.CONSUMER_KEY, credentials.CONSUMER_SECRET)
     auth.set_access_token(credentials.ACCESS_KEY, credentials.ACCESS_SECRET)
-    api = tweepy.API(auth)"""
+    api = tweepy.API(auth)
 
-    ##senddmtest(api)
+    senddmtest(api)
     now = datetime.now().time()
     current_time = now.strftime("%H:%M")
     print(current_time == "18:00")
