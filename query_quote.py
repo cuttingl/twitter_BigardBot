@@ -11,6 +11,7 @@ def query_quote():
             cursor.execute(sql, (random_number()))
             result = cursor.fetchone()            
             return result
+    connectDB.connection.close()
 
 
 def random_number():
@@ -22,4 +23,5 @@ def random_number():
 
             numrandom = random.randint(0, resultNum-1)
             return numrandom
+    connectDB.connection.close()
 
