@@ -11,7 +11,7 @@ def publishTweetFromInput(api):
     print(text + " salut ceci est un test")
 
 def senddmtest(api):
-    #api.send_direct_message('906078704', query_quote.query_quote())
+    api.send_direct_message('906078704', query_quote.query_quote())
     #print(query_quote.query_quote())
     api.send_direct_message('906078704', "salut")
 
