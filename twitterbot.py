@@ -34,7 +34,7 @@ def senddmtest(api, connection):
             resultQuote = cursor.fetchone()
             quote = resultQuote[0]
             cursor.close()
-            connection.connectDB.close()
+            connectDB.connection.close()
 
     api.send_direct_message('906078704', quote)
 
