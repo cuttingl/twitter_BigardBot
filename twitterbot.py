@@ -80,8 +80,8 @@ if __name__ == "__main__":
                              password=credentials.JaPwrd,
                              database=credentials.JaName)
 
-    ##botRoutine(api, connection)
-    senddmtest(api, connection)
+    botRoutine(api, connection)
+    #senddmtest(api, connection)
 
     now = datetime.now().time()
     current_time = now.strftime("%H:%M")
