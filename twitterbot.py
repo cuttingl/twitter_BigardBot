@@ -5,7 +5,6 @@ import credentials
 import pymysql
 import random
 import time
-import connectDB
 
 def publishTweetFromInput(api):
     text = input("le text de votre tweet : ")
@@ -34,7 +33,7 @@ def senddmtest(api, connection):
             resultQuote = cursor.fetchone()
             quote = resultQuote[0]
             cursor.close()
-            connectDB.connection.close()
+            connection.close()
 
     api.send_direct_message('906078704', quote)
 
@@ -64,7 +63,7 @@ def botRoutine(api, connection):
                 resultQuote = cursor.fetchone()
                 quote = resultQuote[0]
                 cursor.close()
-                connectDB.connection.close()
+                connection.close()
 
         if current_time == "20:00":
             api.update_status(quote)
@@ -80,7 +79,8 @@ if __name__ == "__main__":
                              password=credentials.JaPwrd,
                              database=credentials.JaName)
 
-    botRoutine(api, connection)
+    ##botRoutine(api, connection)
+    senddmtest(api, connection)
 
     now = datetime.now().time()
     current_time = now.strftime("%H:%M")
