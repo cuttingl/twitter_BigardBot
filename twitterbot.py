@@ -48,8 +48,8 @@ def botRoutine(api, connection):
     interval = 60 * 60 * 6 * 4
 
     while (True):
-        with connectDB.connection:
-         with connectDB.connection.cursor() as cursor:
+        with connection:
+         with connection.cursor() as cursor:
 
             sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
             cursor.execute(sql1)
@@ -66,7 +66,7 @@ def botRoutine(api, connection):
             cursor.close()
             connectDB.connection.close()
 
-        if current_time == "21:50":
+        if current_time == "20:00":
             api.update_status(quote)
             time.sleep(interval)
 
@@ -80,14 +80,11 @@ if __name__ == "__main__":
                              password=credentials.JaPwrd,
                              database=credentials.JaName)
 
-    senddmtest(api, connection)
-
-    ##botRoutine(api, connection)
+    botRoutine(api, connection)
 
     now = datetime.now().time()
     current_time = now.strftime("%H:%M")
     print(current_time == "18:00")
-    ##publishTweetFromInput(api)
 
 
 
