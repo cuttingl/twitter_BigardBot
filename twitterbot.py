@@ -41,7 +41,7 @@ def senddmtest(api, connection):
 def botRoutine(api, connection):
 
     now = datetime.now().time()
-    current_time = now.strftime("%H:%M:%S")
+    current_time = now.strftime("%H:%M")
 
     numrandom = 0
     quote = ""
@@ -49,22 +49,22 @@ def botRoutine(api, connection):
 
     while (True):
         with connection:
-         with connection.cursor() as cursor:
+            with connection.cursor() as cursor:
 
-            sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
-            cursor.execute(sql1)
+                sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
+                cursor.execute(sql1)
 
-            resultNum = cursor.fetchone()
-            number_cols = resultNum[0]
-            numrandom = random.randint(0, number_cols-1)
+                resultNum = cursor.fetchone()
+                number_cols = resultNum[0]
+                numrandom = random.randint(0, number_cols-1)
 
-            sql = "SELECT `citation` FROM bigardTwitterBot WHERE `id`="+ str(numrandom)
-            cursor.execute(sql)
-            
-            resultQuote = cursor.fetchone()
-            quote = resultQuote[0]
-            cursor.close()
-            connectDB.connection.close()
+                sql = "SELECT `citation` FROM bigardTwitterBot WHERE `id`="+ str(numrandom)
+                cursor.execute(sql)
+                
+                resultQuote = cursor.fetchone()
+                quote = resultQuote[0]
+                cursor.close()
+                connectDB.connection.close()
 
         if current_time == "20:00":
             api.update_status(quote)
