@@ -46,24 +46,22 @@ def botRoutine(api, connection):
     numrandom = 0
     quote = ""
     interval = 60 * 60 * 6 * 4
+    cursor = connection.cursor()
+    sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
+    cursor.execute(sql1)
+
+    resultNum = cursor.fetchone()
+    number_cols = resultNum[0]
+    numrandom = random.randint(0, number_cols-1)
+
+    sql = "SELECT `citation` FROM bigardTwitterBot WHERE `id`="+ str(numrandom)
+    cursor.execute(sql)
+            
+    resultQuote = cursor.fetchone()
+    quote = resultQuote[0]
 
     while (True):
-        if current_time == "15:35":
-            cursor = connection.cursor()
-            sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
-            cursor.execute(sql1)
-
-            resultNum = cursor.fetchone()
-            number_cols = resultNum[0]
-            numrandom = random.randint(0, number_cols-1)
-
-            sql = "SELECT `citation` FROM bigardTwitterBot WHERE `id`="+ str(numrandom)
-            cursor.execute(sql)
-            
-            resultQuote = cursor.fetchone()
-            quote = resultQuote[0]
-
-            
+        if current_time == "15:40":
             api.update_status(quote)
             time.sleep(interval)
 
