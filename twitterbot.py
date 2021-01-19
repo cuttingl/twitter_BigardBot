@@ -48,6 +48,7 @@ def botRoutine(api, connection):
     interval = 60 * 60 * 6 * 4
 
     while (True):
+        if current_time == "15:35":
             cursor = connection.cursor()
             sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
             cursor.execute(sql1)
@@ -62,9 +63,9 @@ def botRoutine(api, connection):
             resultQuote = cursor.fetchone()
             quote = resultQuote[0]
 
-            if current_time == "20:30":
-                api.update_status(quote)
-                time.sleep(interval)
+            
+            api.update_status(quote)
+            time.sleep(interval)
 
 
 if __name__ == "__main__":
