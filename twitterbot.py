@@ -39,13 +39,11 @@ def senddmtest(api, connection):
     api.send_direct_message('906078704', quote)
 
 def botRoutine(api, connection):
-
     now = datetime.now().time()
     current_time = now.strftime("%H:%M")
 
     numrandom = 0
     quote = ""
-    interval = 60 * 60 * 6 * 4
     cursor = connection.cursor()
     sql1 = "SELECT COUNT(*) FROM bigardTwitterBot"
     cursor.execute(sql1)
@@ -60,10 +58,8 @@ def botRoutine(api, connection):
     resultQuote = cursor.fetchone()
     quote = resultQuote[0]
 
-    while (True):
-        if current_time == "16:38":
-            api.update_status(quote)
-            time.sleep(interval)
+   
+    api.update_status(quote)
 
 
 if __name__ == "__main__":
