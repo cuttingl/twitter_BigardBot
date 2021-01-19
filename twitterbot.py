@@ -61,7 +61,7 @@ def botRoutine(api, connection):
     quote = resultQuote[0]
 
     while (True):
-        if current_time == "15:40":
+        if current_time == "16:38":
             api.update_status(quote)
             time.sleep(interval)
 
